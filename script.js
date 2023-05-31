@@ -9,6 +9,8 @@ const desc = document.getElementById('desc');
 const select = document.getElementById('select');
 const date = document.getElementById('date');
 
+const addAgain = document.getElementById('addAgain');
+
 const list = document.getElementById('list');
 const totalBudgetDisplay = document.getElementById('totalBudgetDisplay');
 const remainingBalanceDisplay = document.getElementById('remainingBalanceDisplay');
@@ -27,23 +29,26 @@ function arrayEnlist(arr){
     let posNum = arr.filter(v=>v.amount >= 0)
     let negNum = arr.filter(v=>v.amount < 0)
 
-    console.log('posNum', posNum)
-    console.log('negNum', negNum)
-    
     let posArray = posNum.map(v=>v.amount)
     let negArray = negNum.map(v=>v.amount)
     
     console.log('posArray', posArray)
     console.log('negArray', negArray)
 
-    
+    let posRed = posArray.reduce((a,b)=> +a + +b,0)
+    let negRed = negArray.reduce((a,b)=> +a + +b,0)
 
-    remainingBalanceAmount = 0;
+    console.log('posRed', posRed)
+    console.log('negRed', negRed)
+
+    remainingBalanceAmount = +totalBudgetAmount - (posRed + negRed);
 
     // *******************
     totalBudgetDisplay.innerHTML = "<div id = 'totalDisplay'>"+ 'Balance: ' + "<h4>" + '$' + totalBudgetAmount + "</h4>" + "</div>"
     remainingBalanceDisplay.innerHTML = "<div id = 'totalDisplay'>"+ 'Remaining: ' + "<h4>" + '$' + remainingBalanceAmount + "</h4>" + "</div>"
     // *******************
+
+    list.innerHTML = ""
 
     arr.forEach((v, i)=>{
     const icon = v.category === 'Restaurants & Cafe' ? iconMug() 
@@ -89,5 +94,10 @@ function submitForm(e){
     arrayEnlist(arr);
 }
 
+function openSecondContainer(){
+    secondContainer.style.display = 'block';
+}
+
 subBtnTtl.addEventListener('click', submitBudget)
 subBtnForm.addEventListener('click',submitForm)
+addAgain.addEventListener('click', openSecondContainer)
