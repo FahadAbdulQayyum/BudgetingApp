@@ -17,12 +17,44 @@ const remainingBalanceDisplay = document.getElementById('remainingBalanceDisplay
 let totalBudgetAmount = 0;
 let arr = [];
 
-function arrayEnlist(){
+function arrayEnlist(arr){
+    const iconMug = () => '<img id="mug" src="./icons/mug.png"/>'
+    const iconBag = () => '<img id="bag" src="./icons/bag.png"/>'
+    const iconGift = () => '<img id="gift" src="./icons/gift.png"/>'
+    const iconCard = () => '<img id="card" src="./icons/card.png"/>'
+    const bookMark = () => '<img id="mark" src="./icons/mark.png"/>'
+
+    let posNum = arr.filter(v=>v.amount >= 0)
+    let negNum = arr.filter(v=>v.amount < 0)
+
+    console.log('posNum', posNum)
+    console.log('negNum', negNum)
+    
+    let posArray = posNum.map(v=>v.amount)
+    let negArray = negNum.map(v=>v.amount)
+    
+    console.log('posArray', posArray)
+    console.log('negArray', negArray)
+
+    
+
+    remainingBalanceAmount = 0;
+
+    // *******************
+    totalBudgetDisplay.innerHTML = "<div id = 'totalDisplay'>"+ 'Balance: ' + "<h4>" + '$' + totalBudgetAmount + "</h4>" + "</div>"
+    remainingBalanceDisplay.innerHTML = "<div id = 'totalDisplay'>"+ 'Remaining: ' + "<h4>" + '$' + remainingBalanceAmount + "</h4>" + "</div>"
+    // *******************
+
     arr.forEach((v, i)=>{
-        let li = document.createElement('li');
-        // li.innerHTML += v.amount +' --- ' + v.category;
-        li.innerHTML += "<div>" + "<div>" + "<img src='' />" + "</div>" + "<div>" + "<p>" + v.category + "</p>" + "<span>" + v.date + "</span>" + "</div>" + "<div>" + v.amount + "</div>" + "</div>";
-        list.appendChild(li);
+    const icon = v.category === 'Restaurants & Cafe' ? iconMug() 
+    : v.category === 'Clothes & Shopping' ? iconBag() 
+    : v.category === 'Credit & Loans' ? iconCard()
+    : v.category === 'Gifts Card' ? iconGift()
+    : ''
+
+    let li = document.createElement('li');
+    li.innerHTML += "<div id='li'>" + "<div>" + icon + "</div>" + "<div>" + "<span>" + v.category + "</span>" + "<span>"  +  v.date + "</span>" + "</div>" + "<div id='rightmost'>" + "<span id='amountt'>" + '-$' + v.amount + "</span>" + "<span>" + bookMark() + "</span>" + "<span id='cancel'>" + '&times' + "</span>" + "</div>" + "</div>";
+    list.appendChild(li);
     })
 }
 

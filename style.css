@@ -1,6 +1,6 @@
 /* .first-container {
     display: none;
-} */
+}
 
 .second-container {
     display: none;
@@ -8,4 +8,100 @@
 
 .third-container {
     display: none;
+} */
+
+#li {
+    display: flex;
+    background-color: beige;
+}
+
+#li div {
+    display: flex;
+    padding: 8px;
+    align-items: center;
+    /* justify-content: space-between; */
+    /* width: 100%; */
+}
+
+#li div#rightmost {
+    margin: auto;
+    margin-right: 20px;
+}
+
+/* 
+#li div#leftmost {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: red;
+} */
+
+#li div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+#li div:nth-child(2) span:nth-child(1) {
+    font-weight: bolder;
+}
+
+/* #li div#rightmost {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+li {
+    list-style-type: none;
+    margin: 10px 0;
+    width: 98%;
+    border-radius: 10px;
+    border: 1px solid oldlace;
+}
+
+li img {
+    border-radius: 10px;
+    margin-right: 10px;
+    height: 40px;
+    width: 40px;
+}
+
+#mark {
+    height: 25px;
+    width: 25px;
+    background-color: rgba(62, 62, 243, 0.1);
+    padding: 5px;
+}
+
+#cancel {
+    background-color: lightgray;
+    padding: 0 5px;
+    border-radius: 5px;
+}
+
+#amountt {
+    margin-right: 60px;
+    font-weight: bolder;
+}
+
+#totalDisplay {
+    display: flex;
+    align-items: baseline;
+}
+
+#mug {
+    background-color: rgba(62, 62, 243, 0.2);
+}
+
+#bag {
+    background-color: rgba(229, 17, 249, 0.2);
+}
+
+#card {
+    background-color: rgba(249, 210, 17, 0.2);
+}
+
+#gift {
+    background-color: rgba(249, 17, 17, 0.2);
 }
