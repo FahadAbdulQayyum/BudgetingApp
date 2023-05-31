@@ -56,7 +56,7 @@ function arrayEnlist(arr){
     remainingBalanceAmount = +totalBudgetAmount - (posRed + negRed);
 
     // Displaying the total Budget entered by user
-    totalBudgetDisplay.innerHTML = "<div id = 'totalDisplay'>"+ 'Balance: ' + "<h4>" + '$' + totalBudgetAmount + "</h4>" + "</div>"
+    totalBudgetDisplay.innerHTML = "<div id = 'totalDisplay'>"+ 'Budget: ' + "<h4>" + '$' + totalBudgetAmount + "</h4>" + "</div>"
     // Display the remaining amount after calculation
     remainingBalanceDisplay.innerHTML = "<div id = 'totalDisplay'>"+ 'Remaining: ' + "<h4>" + '$' + remainingBalanceAmount + "</h4>" + "</div>"
 
