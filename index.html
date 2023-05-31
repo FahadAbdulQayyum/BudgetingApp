@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
+    <script src="./script.js" defer></script>
+    <title>Budgeting Appp</title>
+</head>
+<body>
+    <!-- first container starts -->
+        <div id="first-container" class="first-container row align-items-center" style="height:100vh;">
+            <div class="mx-auto col-10 col-md-8 col-lg-6">
+                <div class="form">
+                    <div class="form-group d-flex flex-column">
+                        <label for="">Total Budget</label>
+                        <input type="number" placeholder="Enter your total Budget" class="form-control" id="totalBudget" autofocus>
+                        <input type="submit" value="Submit" class="btn btn-primary mt-3" id="subBtnTtl">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- first container ends -->
+        <!-- second container starts -->
+        <div id="second-container" class="second-container row align-items-center" style="height: 100vh;">
+            <div class="mx-auto col-10 col-md-8 col-lg-6">
+                <form class="form-group d-flex flex-column">
+                    <label for="">Amount</label>
+                    <input type="number" class="form-control" placeholder="Enter the amount" id="amount" autofocus/>
+                    <label for="">Description</label>
+                    <input type="text" class="form-control" placeholder="Enter the description" id="desc"/>
+                    <label for="">Category</label>
+                    <select name="" id="select" class="form-control">
+                        <option value="Restaurants & Cafe">Restaurants & Cafe</option>
+                        <option value="Clothes & Shopping">Clothes & Shopping</option>
+                        <option value="Credit & Loans">Credit & Loans</option>
+                        <option value="Gifts Card">Gifts Card</option>
+                    </select>
+                    <label for="">Date</label>
+                    <input type="date" class="form-control" id="date">
+                    <input type="submit" value="Submit" class="btn btn-primary mt-3" id="subBtnForm">
+                </form>
+            </div>
+        </div>
+        <!-- second container ends -->
+        <!-- third container starts -->
+        <div class="third-container" id="third-container">
+            <div class="totalBudgetDisplay" id="totalBudgetDisplay"></div>
+            <div class="remainingBalanceDisplay" id="remainingBalanceDisplay"></div>
+            <ul class="list" id="list">
+
+            </ul>
+        </div>
+        <!-- third container ends -->
+</body>
+</html>
