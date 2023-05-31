@@ -10,6 +10,11 @@
     display: none;
 } */
 
+.third-container span {
+    display: flex;
+    justify-content: space-around;
+}
+
 #li {
     display: flex;
     background-color: beige;
@@ -78,6 +83,7 @@ li img {
     background-color: lightgray;
     padding: 0 5px;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 #amountt {

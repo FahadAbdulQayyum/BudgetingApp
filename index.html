@@ -29,6 +29,7 @@
                 <form class="form-group d-flex flex-column">
                     <label for="">Amount</label>
                     <input type="number" class="form-control" placeholder="Enter the amount" id="amount" autofocus/>
+                    <small id="small"></small>
                     <label for="">Description</label>
                     <input type="text" class="form-control" placeholder="Enter the description" id="desc"/>
                     <label for="">Category</label>
@@ -47,10 +48,14 @@
         <!-- second container ends -->
         <!-- third container starts -->
         <div class="third-container" id="third-container">
-            <div class="totalBudgetDisplay" id="totalBudgetDisplay"></div>
-            <div class="remainingBalanceDisplay" id="remainingBalanceDisplay"></div>
+            <span>
+                <div class="totalBudgetDisplay" id="totalBudgetDisplay"></div>
+                <div class="remainingBalanceDisplay" id="remainingBalanceDisplay"></div>
+            </span>
             <ul class="list" id="list"></ul>
-            <input type="submit" value="Add Expense" id="addAgain">
+            <div class="d-flex">
+                <input type="submit" value="Add Expense" id="addAgain" class="btn btn-primary mx-auto">
+            </div>
         </div>
         <!-- third container ends -->
 </body>

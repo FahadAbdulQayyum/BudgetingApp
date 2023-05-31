@@ -10,13 +10,17 @@ const select = document.getElementById('select');
 const date = document.getElementById('date');
 
 const addAgain = document.getElementById('addAgain');
+const small = document.getElementById('small');
 
 const list = document.getElementById('list');
 const totalBudgetDisplay = document.getElementById('totalBudgetDisplay');
 const remainingBalanceDisplay = document.getElementById('remainingBalanceDisplay');
 
 
+let validate = false;
 let totalBudgetAmount = 0;
+let remainingBalanceAmount = 0;
+let compareAmount = 0;
 let arr = [];
 
 function arrayEnlist(arr){
@@ -58,9 +62,16 @@ function arrayEnlist(arr){
     : ''
 
     let li = document.createElement('li');
-    li.innerHTML += "<div id='li'>" + "<div>" + icon + "</div>" + "<div>" + "<span>" + v.category + "</span>" + "<span>"  +  v.date + "</span>" + "</div>" + "<div id='rightmost'>" + "<span id='amountt'>" + '-$' + v.amount + "</span>" + "<span>" + bookMark() + "</span>" + "<span id='cancel'>" + '&times' + "</span>" + "</div>" + "</div>";
+    li.innerHTML += "<div id='li'>" + "<div>" + icon + "</div>" + "<div>" + "<span>" + v.category + "</span>" + "<span>"  +  v.date + "</span>" + "</div>" + "<div id='rightmost'>" + "<span id='amountt'>" + '-$' + v.amount + "</span>" + "<span>" + bookMark() + "</span>" + "<span id='cancel' onClick='clickCancel(" + i + ")'>" + '&times' + "</span>" + "</div>" + "</div>";
     list.appendChild(li);
     })
+}
+
+function clickCancel(i){
+    console.log('i', i)
+    arr.splice(i, 1)
+
+    arrayEnlist(arr)
 }
 
 function submitBudget(){
@@ -75,29 +86,72 @@ function submitBudget(){
 function submitForm(e){
     e.preventDefault();
 
-    let obj = {
-        amount: amount.value,
-        desc: desc.value,
-        category: select.value,
-        date: date.value
+    if(validate){
+        console.log('Yes, it is valid!')
+
+        let obj = {
+            amount: amount.value,
+            desc: desc.value,
+            category: select.value,
+            date: date.value
+        }
+        
+        console.log('totalBudgetAmount',totalBudgetAmount)
+        console.log('obj',obj)
+
+        arr.push(obj)
+
+        firstContainer.style.display = 'none'
+        secondContainer.style.display = 'none'
+        thirdContainer.style.display = 'block'
+
+        arrayEnlist(arr);
     }
-    
-    console.log('totalBudgetAmount',totalBudgetAmount)
-    console.log('obj',obj)
 
-    arr.push(obj)
-
-    firstContainer.style.display = 'none'
-    secondContainer.style.display = 'none'
-    thirdContainer.style.display = 'block'
-
-    arrayEnlist(arr);
+    console.log('invalidate')
 }
 
 function openSecondContainer(){
+    amount.value = ''
+    desc.value = ''
+    select.value = ''
+    date.value = ''
+
     secondContainer.style.display = 'block';
 }
 
+function validation(){
+
+    let inp = small.parentElement;
+    let input = inp.querySelector('input') 
+
+    small.style.display = 'none'
+
+    console.log('remainingAmount, totalBudget', +remainingBalanceAmount>1, totalBudgetAmount)
+    compareAmount = +remainingBalanceAmount > 1 ? +remainingBalanceAmount : +totalBudgetAmount
+    if(+amount.value === 0){
+        small.style.display = 'block'
+        small.style.color = 'red'
+        input.style.boxShadow = '1px 1px 5px 1px red'
+        validate = false
+        return small.innerText = `Input should be greater than zero.`
+    }
+    else if(+amount.value > compareAmount){
+        small.style.display = 'block'
+        small.style.color = 'red'
+        input.style.boxShadow = '1px 1px 5px 1px red'
+        validate = false
+        return small.innerText = `Your input is exceeding than ${compareAmount}`
+    }else {
+        small.style.display = 'block'
+        small.style.color = 'green'
+        input.style.boxShadow = '1px 1px 5px 1px green'
+        validate = true
+        return small.innerText = `Your input is considerable`
+    }
+}
+
 subBtnTtl.addEventListener('click', submitBudget)
+amount.addEventListener('input', validation)
 subBtnForm.addEventListener('click',submitForm)
 addAgain.addEventListener('click', openSecondContainer)
