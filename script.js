@@ -3,6 +3,7 @@ const firstContainer = document.getElementById('first-container');
 const secondContainer = document.getElementById('second-container');
 const thirdContainer = document.getElementById('third-container');
 const subBtnTtl = document.getElementById('subBtnTtl');
+const updBtnForm = document.getElementById('updBtnForm');
 const subBtnForm = document.getElementById('subBtnForm');
 const totalBudget = document.getElementById('totalBudget');
 const amount = document.getElementById('amount');
@@ -27,6 +28,8 @@ let remainingBalanceAmount = 0;
 let compareAmount = 0;
 // Array used for collecting all objectified data
 let arr = [];
+
+let index = 0;
 
 // Enlisting function
 function arrayEnlist(arr){
@@ -75,7 +78,7 @@ function arrayEnlist(arr){
     // Creating 'li'
     let li = document.createElement('li');
     // Appending the list each iteration
-    li.innerHTML += "<div id='li'>" + "<div>" + icon + "</div>" + "<div>" + "<span>" + v.category + "</span>" + "<span>"  +  v.date + "</span>" + "</div>" + "<div id='rightmost'>" + "<span id='amountt'>" + '-$' + v.amount + "</span>" + "<span>" + bookMark() + "</span>" + "<span id='cancel' onClick='clickCancel(" + i + ")'>" + '&times' + "</span>" + "</div>" + "</div>";
+    li.innerHTML += "<div id='li'>" + "<div>" + icon + "</div>" + "<div>" + "<span>" + v.category + "</span>" + "<span>"  +  v.date + "</span>" + "</div>" + "<div id='rightmost'>" + "<span id='amountt'>" + '-$' + v.amount + "</span>" + "<span onClick='markPress(" + i + ")'>" + bookMark() + "</span>" + "<span id='cancel' onClick='clickCancel(" + i + ")'>" + '&times' + "</span>" + "</div>" + "</div>";
     // Appending 'li' to list 
     list.appendChild(li);
     })
@@ -138,6 +141,62 @@ function openSecondContainer(){
     secondContainer.style.display = 'block';
 }
 
+// Mark Press function 
+function markPress(i){
+    console.log('Mark Pressed i', i)
+    console.log('Mark Pressed arr[i]', arr[i])
+    secondContainer.style.display = 'block'
+    amount.value = arr[i].amount
+    desc.value = arr[i].desc
+    select.value = arr[i].category
+    date.value = arr[i].date
+
+    subBtnForm.style.display = 'none'
+    updBtnForm.style.display = 'block'
+
+    index = i
+
+    updBtnForm.addEventListener('click', renderToForm)
+}
+
+// Render the data from form when update button is pressed
+function renderToForm(e){
+    e.preventDefault();
+
+    small.style.display = 'none'
+
+    if(amount.value > (+remainingBalanceAmount + +arr[index].amount)){
+        small.style.color = 'red'
+        small.style.display = 'block'
+        return small.innerText = `Your amount is exceeding than ${+remainingBalanceAmount + +arr[index].amount}`
+    }
+
+        let updateObj = {
+        amount: amount.value,
+        desc: desc.value,
+        category: select.value,
+        date: date.value
+    }
+
+    arr[index] = updateObj
+
+    index = 0;
+
+    updateArray(arr)
+}
+
+// Update Array function
+function updateArray(arr){
+    arrayEnlist(arr)
+    toThirdContainer()
+}
+
+function toThirdContainer(){
+    firstContainer.style.direction = 'none'
+    secondContainer.style.display = 'none'
+    thirdContainer.style.direction = 'block'
+}
+
 // function for validating the form
 function validation(){
 
@@ -150,7 +209,8 @@ function validation(){
     small.style.display = 'none'
 
     // Assigning to 'compareAmount' a value by applying following's condition
-    compareAmount = +remainingBalanceAmount > 1 ? +remainingBalanceAmount : +totalBudgetAmount
+    compareAmount = (+remainingBalanceAmount > 1 && +remainingBalanceAmount < +totalBudgetAmount) ? +remainingBalanceAmount : +totalBudgetAmount
+
     // If user enters 0
     if(+amount.value === 0){
         small.style.display = 'block'
